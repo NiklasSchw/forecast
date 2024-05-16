@@ -103,5 +103,10 @@ async function loadWind(url) {
             velocityType: "",
         }
     }).addTo(themaLayer.wind);
+
+    //Vorhersagezeitpunkt ermittlen
+    let forecastDate = new Date(jsondata[0].header.refTime);
+    forecastDate.setHours(forecastDate.getHours() + jsondata[0].header.forecastTime);
+    console.log(forecastDate);
 }
 loadWind("https://geographie.uibk.ac.at/data/ecmwf/data/wind-10u-10v-europe.json");
