@@ -84,3 +84,11 @@ map.on("click", function (evt) {
 map.fire("click", {
     latlng: ibk
 });
+
+// Windkarte
+async function loadWind(url) {
+    const response = await fetch(url);
+    const jsondata = await response.json();
+    console.log(jsondata);
+}
+loadWind("http://geographie.uibk.ac.at/data/ecmwf/data/wind-10u-10v-europe.json");
