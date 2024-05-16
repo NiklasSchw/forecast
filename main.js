@@ -36,7 +36,6 @@ async function showForecast(url) {
     let jsondata = await response.json();
 
     // aktuelles Wetter und Wettervorhersage implementieren
-    console.log(jsondata);
     L.geoJSON(jsondata, {
         pointToLayer: function (feature, latlng) {
             let details = feature.properties.timeseries[0].data.instant.details;
@@ -61,6 +60,10 @@ async function showForecast(url) {
                 `
             }
 
+            //Link zum Datendownload
+            content += `
+                <p><a href ="${url}" target="met.no">Daten downloaden</a></p>
+            `;
             L.popup(latlng, {
                 content: content
             }).openOn(themaLayer.forecast);
