@@ -41,8 +41,6 @@ async function showForecast(url) {
         pointToLayer: function (feature, latlng) {
             let details = feature.properties.timeseries[0].data.instant.details;
             let time = new Date(feature.properties.timeseries[0].time);
-            console.log(time);
-            console.log(details);
             let content = `
             <h4>Wettervorhersage für ${time.toLocaleString()}</h4>
             <ul>
@@ -54,6 +52,14 @@ async function showForecast(url) {
                 <li>Windgeschwindigkeit (km/h): ${Math.round(details.wind_speed * 3.6)}</li>
             </ul>
             `;
+
+            //WetterIcons für die nächsten 24 Stunden im 3-Stunden-Takt
+            for (let i = 0; i <= 24; i += 3) {
+                let symbol = feature.properties.timeseries[i].data.next_1_hours.summary.symbol_code;
+                content += `<img src="icons/${symbol}.svg" alt ="${symbol}" style="width: 30px">
+                `
+            }
+
             L.popup(latlng, {
                 content: content
             }).openOn(themaLayer.forecast);
