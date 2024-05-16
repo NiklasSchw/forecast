@@ -75,7 +75,12 @@ showForecast("https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=47.
 
 // auf Kartenklick reagieren
 map.on("click", function (evt) {
-    console.log(evt);
-    console.log(evt.latlng.lat, evt.latlng.lng);
+    // console.log(evt);
+    // console.log(evt.latlng.lat, evt.latlng.lng);
     showForecast(`https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=${evt.latlng.lat}&lon=${evt.latlng.lng}`)
+});
+
+// Klick auf Innsbrck simulieren
+map.fire("click", {
+    latlng: ibk
 });
